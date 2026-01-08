@@ -67,7 +67,7 @@ export function saveBills() {
 
   localStorage.setItem(billName, JSON.stringify(bill));
 
-  showMessage("Bill saved successfully.");
+  showMessage("bill-table-message", "Bill saved successfully.");
 
   console.log(`${billName}: ${localStorage.getItem(billName)}`);
 }
