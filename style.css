@@ -21,7 +21,11 @@ input, select, button {
 }
 
 .list {
-    margin-right: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 25%;
 }
 
 .nav-bar {
@@ -37,7 +41,7 @@ input, select, button {
 }
 
 .normal-btn {
-    background-color: #d1e7ff;
+    background-color: #4dacff;
     color: white;
     border: none;
     cursor: pointer;
@@ -48,11 +52,32 @@ input, select, button {
 }
 
 .normal-btn:hover {
-    background-color: #a3c2e3;
+    background-color: #2f93ec;
+}
+
+.warning-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+.warning-btn:hover {
+    background-color: #ea2b2b;
 }
 
 .main-container {
     margin: 1em;
+}
+
+.table-title {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
 }
 
 .bill-buttons {
@@ -73,9 +98,14 @@ button:hover {
     background-color: #a3c2e3;
 }
 
-#message {
+#settings-message {
     color: green;
     text-align: center;
+    font-size: 0.9em;
+}
+
+#bill-table-message {
+    color: red;
     font-size: 0.9em;
 }
 
@@ -83,22 +113,101 @@ button:hover {
     margin-left: 1em;
 }
 
-#settings-modal-container {
+#settings-modal-container, #bill-entry-container {
     background: white;
     padding: 20px;
     border: 1px solid lightgray;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
     width: 300px;
-    display: none;
 }
 
-#bill-entry-container {
-    background: white;
-    padding: 20px;
-    border: 1px solid lightgray;
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1000; /* High number to sit above the table */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* The actual modal box */
+.modal-content {
+    background-color: white;
+    padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    width: 300px;
-    display: none;
+    z-index: 1001; /* Must be higher than the overlay */
+    max-width: 500px;
+    width: 90%;
+}
+
+
+/*table AI generated style*/
+
+/* Container to handle overflow on mobile */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header Styling */
+th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 600;
+    text-align: left;
+    padding: 16px;
+    border-bottom: 2px solid #dee2e6;
+    position: sticky; /* Keeps header visible while scrolling */
+    top: 0;
+}
+
+/* Cell Styling */
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    vertical-align: top;
+}
+
+/* Zebra Striping & Hover Effect */
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+tbody tr:hover {
+    background-color: #f1f5ff; /* Subtle blue highlight */
+    transition: background-color 0.2s ease;
+}
+
+/* Style for the "nested" bill info */
+td strong {
+    color: #007bff;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+/* Style for the selected row */
+tr.selected {
+    background-color: #e3f2fd !important; /* Soft blue highlight */
+    outline: 2px solid #2196f3;
+}
+
+/* Make rows look interactive */
+tbody tr {
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
