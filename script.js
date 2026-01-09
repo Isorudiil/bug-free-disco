@@ -1,62 +1,26 @@
-import {
-  getAllBills,
-  hideAllBills,
-  selectBill,
-} from "./scripts/billsTable.js"
+import { UIController } from './scripts/UIController.js';
+import {billsModal, tableBody} from "./scripts/constants.js";
 
-import {
-  getAllStorage,
-  loadSettings,
-  saveBills,
-  saveSettings,
-} from "./scripts/storageUtils.js";
+UIController.init();
 
-import {
-  billsCloseBtn,
-  billsModal,
-  billsOpenBtn,
-  billsSaveButton,
-  getBills,
-  hideBills,
-  removeItemBtn,
-  settingsCloseBtn,
-  settingsModal,
-  settingsOpenBtn,
-  settingsSaveButton,
-  viewAllBtn,
-} from "./scripts/constants.js";
+tableBody.addEventListener("click", (e) => {
+  const row = e.target.closest("tr");
+  if (!row) return;
 
-// Open the modal
-settingsOpenBtn.onclick = function() {
-  loadSettings()
-  settingsModal.showModal();
-}
+  const billKey = row.dataset.id;
+  const rawData = localStorage.getItem(billKey);
 
-settingsCloseBtn.onclick = function() {
-  settingsModal.close();
-}
+  if (rawData) {
+    const data = JSON.parse(rawData);
 
-billsOpenBtn.onclick = function() {
-  billsModal.showModal();
-}
+    // Populate your modal inputs
+    document.getElementById("billNameInput").value = billKey; // The key is the name
+    document.getElementById("billCategoryInput").value = data.billCategory;
+    document.getElementById("billAutoPayInput").value = data.billAutoPay;
+    document.getElementById("billDueDateInput").value = data.billDueDate;
+    document.getElementById("billAmountInput").value = data.billAmount;
 
-billsCloseBtn.onclick = function() {
-  billsModal.close();
-}
-
-viewAllBtn.onclick = function() {
-  getAllStorage();
-}
-
-getBills.onclick = function() {
-  getAllBills();
-  selectBill();
-}
-
-hideBills.onclick = function() {
-  hideAllBills();
-}
-
-// Event listeners
-settingsSaveButton.addEventListener('click', saveSettings);
-billsSaveButton.addEventListener('click', saveBills);
+    // Show the modal
+    billsModal.showModal();
+  }
+});

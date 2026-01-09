@@ -14,7 +14,7 @@ export function getAllBills() {
       const parsed = JSON.parse(value);
 
       const row = `
-      <tr id="${key}">
+      <tr data-id="${key}" class="bill-row">
         <td>${key}</td>
         <td>${capitalize(parsed.billCategory)}</td>
         <td>${capitalize(parsed.billAutoPay)}</td>
@@ -28,9 +28,6 @@ export function getAllBills() {
   });
 }
 
-export function hideAllBills() {
-  tableBody.innerHTML = "";
-}
 
 export function selectBill() {
     tableBody.addEventListener("click", (event) => {

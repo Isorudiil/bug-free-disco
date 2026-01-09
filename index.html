@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,34 +8,33 @@
         <link rel="stylesheet" href="style.css">
         <script defer  type="module" src="script.js"></script>
     </head>
+
     <body>
         <div class="nav-bar">
             <div class="nav-items">
-                <h1 id="page-name">Home</h1>
-                <ul class="list">
-                    <li class="normal-btn" id="open-settings-modal-btn">Settings</li>
-                    <li class="normal-btn" id="view-all-storage-btn">Console Log Storage</li>
-                </ul>
+                <h1 id="page-name">Bill Tracker v0</h1>
+                <div class="normal-btn div-btn" id="open-settings-modal-btn">Settings</div>
             </div>
         </div>
 
         <div class="main-container">
             <div class="bill-entry">
-                <h1>Bill Entry</h1>
                 <ul class="bill-buttons">
                     <li class="normal-btn" id="open-bills-modal-btn">New Bill</li>
+                    <li class="normal-btn" id="edit-bill-modal-btn">Edit Bill</li>
                     <li class="warning-btn" id="remove-from-storage-btn">Remove Bill</li>
-                    <li class="normal-btn" id="get-all-bills">List Bills</li>
-                    <li class="normal-btn" id="hide-bills">Hide Bills</li>
                 </ul>
                 <p id="bill-table-message"></p>
-                <h2 class="table-title">Bills</h2>
+
+                <hr />
+
+                <h3 class="table-title"> Current Bills</h3>
                 <table>
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Category</th>
-                            <th>AutoPay</th>
+                            <th>Auto Pay</th>
                             <th>Due Date</th>
                             <th>Amount</th>
                         </tr>
@@ -43,33 +43,46 @@
                 </table>
             </div>
         </div>
+
+
         <dialog id="bill-entry-container">
-            <h1>Bill Entry</h1>
-            <label for="bill-name">Name:</label>
-            <input type="text" id="bill-name" placeholder="Enter Bill Name">
+            <h3>Bill Entry</h3>
 
-            <label for="bill-category">Category:</label>
-            <select name="bill-category" id="bill-category">
-                <option value="credit-card">Credit Card</option>
-                <option value="short-term">Short Term</option>
-                <option value="subscription">Subscription</option>
-                <option value="utility">Utility</option>
-            </select>
+            <form id="bill-entry-form">
+                <label for="bill-name">Name:</label>
+                <input type="text" id="bill-name" placeholder="Enter Bill Name">
 
-            <label for="bill-auto-pay">Auto-Pay:</label>
-            <input type="checkbox" id="bill-auto-pay">
+                <label for="bill-category">Category:</label>
+                <select name="bill-category" id="bill-category">
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Short Term">Short Term</option>
+                    <option value="Subscription">Subscription</option>
+                    <option value="Utility">Utility</option>
+                </select>
 
-            <label for="bill-due-date">Due Date:</label>
-            <input type="date" id="bill-due-date">
+                <label for="bill-auto-pay">Auto-Pay:</label>
+                <input type="checkbox" id="bill-auto-pay">
 
-            <label for="bill-amount">Amount:</label>
-            <input type="number" id="bill-amount">
+                <label for="bill-due-date">Due Date:</label>
+                <input type="date" id="bill-due-date">
 
-            <button class="normal-btn" id="bills-save-btn">Save Bill</button>
-            <button class="normal-btn" id="close-bills-modal-btn">Close</button>
+                <label for="bill-amount">Amount:</label>
+                <input
+                        type="text"
+                        name="bill-amount"
+                        id="bill-amount"
+                        inputmode="decimal"
+                        placeholder="0.00"
+                >
+
+                <button class="normal-btn" id="bills-save-btn" formmethod="dialog">Save Bill</button>
+                <button class="normal-btn" id="close-bills-modal-btn">Close</button>
+            </form>
         </dialog>
+
+
         <dialog id="settings-modal-container">
-            <h1>Settings</h1>
+            <h3>Settings</h3>
             <label for="username">Username:</label>
             <input type="text" id="username" placeholder="Enter username">
 
@@ -83,5 +96,7 @@
             <button id="close-settings-modal-btn">Close</button>
             <p id="settings-message"></p>
         </dialog>
+
     </body>
+
 </html>
